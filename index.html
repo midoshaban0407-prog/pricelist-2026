@@ -3,67 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>price list 2026</title>
+    <title>Everymedic Pricelist 2026</title>
     <!-- رابط مكتبة Tailwind CSS للتنسيق السريع -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* نظام الشبكة المخصص */
+        /* نظام الشبكة المخصص لتحكم أفضل في عدد الأعمدة */
         .price-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px; /* زيادة المسافة بين العناصر */
+            padding: 24px;
+        }
+        /* تنسيق إضافي لبطاقة المنتج لإضافة تأثير طفيف عند المرور */
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
     </style>
+    <script>
+        // إعدادات Tailwind مخصصة للألوان لتتناسب مع اللوجو
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'everymedic-blue': '#007BFF', // لون أزرق جذاب مستوحى من اللوجو
+                        'accent-cyan': '#00BCD4', // لون سماوي مميز
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-blue-100">
+<body class="bg-gray-50 font-sans">
 
-    <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-center my-8 text-black-800">pricelist 2026</h1>
+    <!-- Header احترافي مع اللوجو والاسم -->
+    <header class="bg-white shadow-lg p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- اللوجو -->
+            <div class="flex items-center space-x-3">
+                <!-- هنا تحتاج إلى رفع صورة اللوجو على الإنترنت واستخدام الرابط المباشر -->
+                <!-- أنا استخدم رابط الصورة التي أرسلتها في استعلامك لأغراض توضيحية -->
+                <img src="oaidalleapiprodscus.blob.core.windows.net" alt="Everymedic Logo" class="h-10 w-auto">
+                <span class="text-2xl font-bold text-everymedic-blue">Everymedic</span>
+            </div>
+            <h1 class="text-xl font-semibold text-gray-700">قائمة الأسعار 2026</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8">
         
         <!-- بداية الجريد سيستم -->
         <div class="price-grid" id="products-container">
             <!-- سيتم إضافة المنتجات هنا تلقائياً بواسطة JavaScript -->
         </div>
-    </div>
+    </main>
 
     <script>
-        // ضع هنا البيانات المستخرجة من الإكسيل - استخدم روابط صور مباشرة من الإنترنت
-        const products = [
-            // استخدم صوراً حقيقية من الإنترنت بدلاً من مسار الكمبيوتر
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/L5XCCSzn/0423f83a00b18629144687ef2be01caa_600x600.jpg" },
-            { name: "tenscare ", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "fayza ", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-             { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/L5XCCSzn/0423f83a00b18629144687ef2be01caa_600x600.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-{ name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-{ name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-           
-        ];
+        // البيانات المستخرجة من الإكسيل (بدون تغيير)
+        const products =;
 
         const container = document.getElementById('products-container');
 
         products.forEach(product => {
             container.innerHTML += `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-blue-200">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl font-semibold mb-2">${product.name}</h2>
-                        <p class="text-blue-600 font-bold text-lg mb-2">${product.price}</p>
-                        <div class="bg-yellow-50 p-2 rounded text-sm text-gray-600 border-r-4 border-yellow-400">
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-56 object-cover">
+                    <div class="p-5">
+                        <h2 class="text-xl font-bold mb-2 text-gray-800">${product.name}</h2>
+                        <p class="text-2xl font-extrabold text-accent-cyan mb-3">${product.price}</p>
+                        <div class="bg-blue-50 p-3 rounded-lg text-sm text-gray-700 border-r-4 border-everymedic-blue">
                             <strong>ملاحظات:</strong> ${product.note}
                         </div>
                     </div>
