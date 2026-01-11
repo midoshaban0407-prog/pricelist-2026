@@ -3,74 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>price list 2026</title>
-    <!-- رابط مكتبة Tailwind CSS للتنسيق السريع -->
+    <title>قائمة الأسعار 2026 - Everymedic</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* نظام الشبكة المخصص */
-        .price-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #17a2b8 0%, #2c5f7d 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .header-section {
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 30px 20px;
+            margin-bottom: 20px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 280px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #17a2b8;
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #2c5f7d;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .search-filter-section {
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            background: white;
             padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #17a2b8;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #138496;
+            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid #17a2b8;
+            background: white;
+            color: #17a2b8;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .products-count {
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            border: 3px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(23, 162, 184, 0.4);
+            border-color: #17a2b8;
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: contain;
+            background: white;
+            padding: 15px;
+        }
+
+        .image-container {
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .on-order-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #17a2b8;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .product-content {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            min-height: 60px;
+        }
+
+        .product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #17a2b8;
+            margin-bottom: 15px;
+        }
+
+        .on-order-text {
+            background: #d1ecf1;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #0c5460;
+            border-right: 4px solid #17a2b8;
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            padding: 12px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5); }
+            50% { box-shadow: 0 5px 30px rgba(37, 211, 102, 0.8); }
+        }
+
+        .footer {
+            background: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            color: #17a2b8;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            color: #2c5f7d;
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #2c5f7d;
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            padding: 60px 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            .page-title { font-size: 32px; }
+            .logo-container img { max-width: 200px; }
+            .floating-whatsapp {
+                bottom: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+            }
         }
     </style>
 </head>
-<body class="bg-blue-100">
+<body>
+    <div class="header-section">
+        <div class="logo-container">
+            <img src="https://i.ibb.co/WQ8cfHR/Logo.png" alt="Everymedic">
+        </div>
+        <h1 class="page-title">قائمة الأسعار 2026</h1>
+        <p class="subtitle">أجهزة ومستلزمات العلاج الطبيعي والنماذج التشريحية</p>
+    </div>
 
-    <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-center my-8 text-black-800">pricelist 2026</h1>
+    <div class="search-filter-section">
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن المنتج...">
+        </div>
         
-        <!-- بداية الجريد سيستم -->
-        <div class="price-grid" id="products-container">
-            <!-- سيتم إضافة المنتجات هنا تلقائياً بواسطة JavaScript -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="available">المتاح</button>
+            <button class="filter-btn" data-filter="on-order">حسب الطلب</button>
+            <button class="filter-btn" data-filter="low-price">السعر: من الأقل للأعلى</button>
+            <button class="filter-btn" data-filter="high-price">السعر: من الأعلى للأقل</button>
         </div>
     </div>
 
+    <div class="products-count" id="productsCount"></div>
+    <div class="products-grid" id="products-container"></div>
+    <div class="no-results" id="noResults">😔 لا توجد نتائج مطابقة للبحث</div>
+
+    <a href="https://wa.me/201155452776?text=مرحباً، أريد الاستفسار عن المنتجات" class="floating-whatsapp" target="_blank">
+        <svg width="35" height="35" fill="white" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>📍 العنوان</h3>
+                <p>الإسكندرية - سموحة<br>مدينة أسيد</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>📞 تواصل معنا</h3>
+                <p>+20 115 545 2776</p>
+                <p>واتساب متاح على مدار الساعة</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>🏥 Everymedic</h3>
+                <p>متخصصون في أجهزة ومستلزمات العلاج الطبيعي والنماذج التشريحية الطبية عالية الجودة</p>
+                <p style="color: #17a2b8; font-weight: 600; margin-top: 10px;">IMAGINE EVERYTHING!</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 Everymedic. جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
     <script>
-        // ضع هنا البيانات المستخرجة من الإكسيل - استخدم روابط صور مباشرة من الإنترنت
         const products = [
-            // استخدم صوراً حقيقية من الإنترنت بدلاً من مسار الكمبيوتر
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/L5XCCSzn/0423f83a00b18629144687ef2be01caa_600x600.jpg" },
-            { name: "tenscare ", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "fayza ", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-             { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/L5XCCSzn/0423f83a00b18629144687ef2be01caa_600x600.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-            { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-{ name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-      { name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-{ name: "Skeleton 45cm", price: "850 ج.م", note: "متاح خصم", image: "https://i.postimg.cc/0jbnGfsm/36a059bb5231be55168dd66897f5e6fb_800x800.jpg" },
-           
+            { name: "Skeleton 45cm", price: "750 ج.م", priceNum: 750, onOrder: false, image: "https://i.ibb.co/Wv3R9vrv/xl-media-image144.jpg" },
+            { name: "Skeleton 85cm", price: "2025 ج.م", priceNum: 2025, onOrder: false, image: "https://i.ibb.co/6cNpvwK3/xl-media-image145.jpg" },
+            { name: "Skeleton 85cm - Colored", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/bg6ZF44k/xl-media-image147.jpg" },
+            { name: "Skeleton 180cm", price: "8700 ج.م", priceNum: 8700, onOrder: false, image: "https://i.ibb.co/4qPn9dn/xl-media-image146.jpg" },
+            { name: "Elbow", price: "1250 ج.م", priceNum: 1250, onOrder: false, image: "https://i.ibb.co/ymhDNzzT/xl-media-image152.jpg" },
+            { name: "Cervical", price: "1250 ج.م", priceNum: 1250, onOrder: false, image: "https://i.ibb.co/sdtY6ws8/xl-media-image153.jpg" },
+            { name: "Foot", price: "1250 ج.م", priceNum: 1250, onOrder: false, image: "https://i.ibb.co/NnxPQ0S6/xl-media-image126.jpg" },
+            { name: "Shoulder", price: "1250 ج.م", priceNum: 1250, onOrder: false, image: "https://i.ibb.co/d43R5dh8/xl-media-image125.jpg" },
+            { name: "Shoulder with Muscles", price: "2100 ج.م", priceNum: 2100, onOrder: false, image: "https://i.ibb.co/Zz9C3j8G/xl-media-image130.jpg" },
+            { name: "Hand", price: "1250 ج.م", priceNum: 1250, onOrder: false, image: "https://i.ibb.co/vxqhFJjg/xl-media-image135.jpg" },
+            { name: "Hip", price: "1250 ج.م", priceNum: 1250, onOrder: false, image: "https://i.ibb.co/s9SqqXY4/xl-media-image134.jpg" },
+            { name: "Knee", price: "1250 ج.م", priceNum: 1250, onOrder: false, image: "https://i.ibb.co/dwMK3DHK/xl-media-image133.jpg" },
+            { name: "2 Vertebrae", price: "725 ج.م", priceNum: 725, onOrder: false, image: "https://i.ibb.co/6pNL0BF/xl-media-image132.jpg" },
+            { name: "3 Vertebrae", price: "825 ج.م", priceNum: 825, onOrder: false, image: "https://i.ibb.co/w5J78H7/xl-media-image129.jpg" },
+            { name: "4 Vertebrae", price: "925 ج.م", priceNum: 925, onOrder: false, image: "https://i.ibb.co/S4HXjWJY/xl-media-image128.jpg" },
+            { name: "Lumbosacral", price: "1750 ج.م", priceNum: 1750, onOrder: false, image: "https://i.ibb.co/ymnkxvJG/xl-media-image127.jpg" },
+            { name: "Lumbosacral mini", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/7NRMZtRX/xl-media-image148.jpg" },
+            { name: "Lumbosacral with Hip", price: "2200 ج.م", priceNum: 2200, onOrder: false, image: "https://i.ibb.co/fGPg04sG/xl-media-image131.jpg" },
+            { name: "Lumbosacral with hip mini", price: "750 ج.م", priceNum: 750, onOrder: false, image: "https://i.ibb.co/7NGRMnfz/xl-media-image143.jpg" },
+            { name: "Spine 85cm without hip", price: "3000 ج.م", priceNum: 3000, onOrder: false, image: "https://i.ibb.co/LdfNccXv/xl-media-image151.jpg" },
+            { name: "Spine 85cm", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/7NRMZtRX/xl-media-image148.jpg" },
+            { name: "Spine 85cm - Colored", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/vgqck1V/xl-media-image150.jpg" },
+            { name: "Spine with Femur", price: "3900 ج.م", priceNum: 3900, onOrder: false, image: "https://i.ibb.co/3mgh2q4q/xl-media-image142.jpg" },
+            { name: "Eye", price: "1220 ج.م", priceNum: 1220, onOrder: false, image: "https://i.ibb.co/vgqck1V/xl-media-image150.jpg" },
+            { name: "Skull", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/60hqYmVH/xl-media-image137.jpg" },
+            { name: "Skull - Colored", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/LzzdtVx6/xl-media-image136.jpg" },
+            { name: "Female Pelvis section", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/zV14jWZc/xl-media-image139.jpg" },
+            { name: "Muscles Model 27PCs", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/zHLzYyWW/xl-media-image140.jpg" },
+            { name: "Female Pelvis with Muscles and Organs", price: "حسب الطلب", priceNum: 99999, onOrder: true, image: "https://i.ibb.co/bj38BScs/xl-media-image138.png" }
         ];
 
+        let currentProducts = [...products];
         const container = document.getElementById('products-container');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const noResults = document.getElementById('noResults');
 
-        products.forEach(product => {
-            container.innerHTML += `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-blue-200">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl font-semibold mb-2">${product.name}</h2>
-                        <p class="text-blue-600 font-bold text-lg mb-2">${product.price}</p>
-                        <div class="bg-yellow-50 p-2 rounded text-sm text-gray-600 border-r-4 border-yellow-400">
-                            <strong>ملاحظات:</strong> ${product.note}
-                        </div>
-                    </div>
-                </div>
-            `;
+        function renderProducts(prods) {
+            container.innerHTML = '';
+            if (prods.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                container.style.display = 'grid';
+                noResults.style.display = 'none';
+                prods.forEach(p => {
+                    const msg = `مرحباً، أريد الاستفسار عن: ${p.name} - ${p.price}`;
+                    const card = `
+                        <div class="product-card">
+                            <div class="image-container">
+                                ${p.onOrder ? '<div class="on-order-badge">📦 حسب الطلب</div>' : ''}
+                                <img src="${p.image}" alt="${p.name}" class="product-image">
+                            </div>
+                            <div class="product-content">
+                                <h2 class="product-name">${p.name}</h2>
+                                <div class="product-price">${p.price}</div>
+                                ${p.onOrder ? '<div class="on-order-text">⚠️ يتم التوفير حسب الطلب</div>' : ''}
+                                <a href="https://wa.me/201155452776?text=${encodeURIComponent(msg)}" target="_blank" style="text-decoration: none;">
+                                    <button class="whatsapp-btn">
+                                        <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+                                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                        </svg>
+                                        طلب عرض سعر
+                                    </button>
+                                </a>
+                            </div>
+                        </div>`;
+                    container.innerHTML += card;
+                });
+            }
+            document.getElementById('productsCount').textContent = `📦 عدد المنتجات: ${prods.length} منتج`;
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            currentProducts = products.filter(p => p.name.toLowerCase().includes(term));
+            renderProducts(currentProducts);
         });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                
+                if (filter === 'all') currentProducts = [...products];
+                else if (filter === 'available') currentProducts = products.filter(p => !p.onOrder);
+                else if (filter === 'on-order') currentProducts = products.filter(p => p.onOrder);
+                else if (filter === 'low-price') currentProducts = [...products].sort((a, b) => a.priceNum - b.priceNum);
+                else if (filter === 'high-price') currentProducts = [...products].sort((a, b) => b.priceNum - a.priceNum);
+                
+                renderProducts(currentProducts);
+            });
+        });
+
+        renderProducts(products);
     </script>
-    
 </body>
 </html>
